@@ -1,0 +1,71 @@
+﻿@page "/"
+<PageTitle>Ресторант</PageTitle>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">AppName</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        @foreach (var panel in panels)
+        {
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-header">
+                        @panel.Title
+                    </div>
+                    <div class="card-body">
+                        <p>@panel.Content</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .container {
+        margin-top: 10px;
+    }
+    .card {
+        margin-bottom: 10px;
+        width:auto;
+    }
+</style>
+
+@code {
+    public class Panel
+    {
+        public string Title { get; set; }
+        public string Content { get; set; }
+    }
+
+    private List<Panel> panels = new List<Panel>
+    {
+        new Panel { Title = "TEST 1", Content = "Content for panel 1" },
+        new Panel { Title = "TEST 2", Content = "Content for panel 2" },
+        new Panel { Title = "TEST 3", Content = "Content for panel 3" },
+        new Panel { Title = "TEST 4", Content = "Content for panel 3" },
+        new Panel { Title = "TEST 5", Content = "Content for panel 3" },
+        new Panel { Title = "TEST 6", Content = "Content for panel 4" }
+    };
+}

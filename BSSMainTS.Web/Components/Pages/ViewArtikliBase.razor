@@ -1,0 +1,26 @@
+﻿
+@page "/ArtikliGrid"
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 1800)]
+
+@inject ArtikalApiClient apiService
+
+@using Blazorise.DataGrid.Extensions;
+
+<DataGrid TItem="Artikal"
+          Data="@artikli"
+          ReadData="@OnReadData"
+          TotalItems="@totalItems"
+          PageSize="10"
+          ShowPager
+          Responsive>
+    <DataGridCommandColumn />
+    <DataGridColumn Field="@nameof(Artikal.ID)" Caption="#" Sortable="false" />
+    <DataGridColumn Field="@nameof(Artikal.Sifra)" Caption="Шифра" Editable Sortable="true" />
+    <DataGridColumn Field="@nameof(Artikal.Naziv)" Caption="Назив" Editable />
+    <DataGridColumn Field="@nameof(Artikal.ProdaznaCena)" Caption="Цена" DisplayFormat="{0:C}" DisplayFormatProvider="@System.Globalization.CultureInfo.GetCultureInfo("mk-MK")">
+        <EditTemplate>
+            <NumericEdit TValue="decimal" Value="@((decimal)context.CellValue)" ValueChanged="@( v => context.CellValue = v)" />
+        </EditTemplate>
+    </DataGridColumn>
+</DataGrid>

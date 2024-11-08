@@ -1,0 +1,49 @@
+﻿@page "/ArtikliPrikaz"
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 1800)]
+
+@inject ArtikalApiClient apiService
+
+<PageTitle>Листа на артикли со филтри</PageTitle>
+
+<h1>Листа со Артикли</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+@if (artikli == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Реден бр.</th>
+                <th>Шифра</th>
+                <th>Назив</th>
+                <th>Алт. Шифра</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var artikal in artikli)
+            {
+                <tr>
+                    <td>@artikal.ID.ToString()</td>
+                    <td>@artikal.Sifra</td>
+                    <td>@artikal.Naziv</td>
+                    <td>@artikal.ProdaznaCena</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Artikal[]? artikli;
+
+    protected override async Task OnInitializedAsync()
+    {
+        artikli = await apiService.GetArtikliAsync();
+    }
+}
