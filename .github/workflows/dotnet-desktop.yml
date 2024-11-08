@@ -19,6 +19,9 @@ jobs:
       with:
         dotnet-version: '8.x'
 
+    - name: Upgrade .NET SDK
+      run: dotnet workload update
+
     - name: Restore dependencies
       run: dotnet restore
 
