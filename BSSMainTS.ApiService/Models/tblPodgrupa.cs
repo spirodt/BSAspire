@@ -1,12 +1,12 @@
-﻿namespace BSSMainTS.ApiService.Model
+﻿namespace BSSMainTS.ApiService.Models
 {
-    public class tblGrupaNaArtikli
+    public class tblPodgrupa
     {
         public int ID { get; set; }
+        public int GrupaID { get; set; }
         public string Naziv { get; set; }
-        public string? Sifra { get; set; }
-        public int? Status { get; set; }
         public int FirmaID { get; set; }
+        public int? Status { get; set; }
         public byte[] DataVersion { get; set; }
     }
 }
