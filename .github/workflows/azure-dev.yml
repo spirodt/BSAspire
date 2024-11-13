@@ -27,10 +27,12 @@ jobs:
 
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
+        
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0'
+          
       - name: Install .NET Aspire workload
         run: dotnet workload install aspire
 
