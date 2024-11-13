@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
+using AspNetCore.RouteAnalyzer;
+using BSSMainTS.ApiService.Common;
 using BSSMainTS.ApiService.Data;
-using OpenTelemetry.Metrics;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.RateLimiting;
 internal class Program
 {
@@ -37,13 +37,22 @@ internal class Program
             )
         );
 
-
         //Controllers
-        builder.Services.AddControllers();
+        builder.Services
+            .AddControllers(o => o.Conventions.Add(new GenericCrudControllerRouteConvention()))
+            .ConfigureApplicationPartManager(manager =>
+                {
+                    manager.FeatureProviders.Add(new CrudControllerFeatureProvider());
+                });
+
+
         builder.Services.AddEndpointsApiExplorer();
 
         //Helpers
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.CustomSchemaIds(type => type.FullName);
+        });
         // Add services to the container.
         builder.Services.AddProblemDetails();
         //Add RateLimiter to the services container.
@@ -73,13 +82,16 @@ internal class Program
         app.UseRateLimiter();
         if (app.Environment.IsDevelopment())
         {
+            app.MapGet("/debug/routes", (IEnumerable<EndpointDataSource> endpointSources) =>
+        string.Join("\n", endpointSources.SelectMany(source => source.Endpoints)));
+
             app.UseSwagger();
             app.UseSwaggerUI();
         }
 
         app.UseOutputCache();
         // Configure the HTTP request pipeline.
-       
+
         app.MapControllers();
         app.UseExceptionHandler();
         app.MapDefaultEndpoints();

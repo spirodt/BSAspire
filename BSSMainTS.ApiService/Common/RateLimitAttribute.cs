@@ -1,11 +1,7 @@
-﻿namespace BSSMainTS.ApiService;
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
-
+namespace BSSMainTS.ApiService.Common;
 public class RateLimitAttribute : ActionFilterAttribute
 {
     private readonly string _policyName;
