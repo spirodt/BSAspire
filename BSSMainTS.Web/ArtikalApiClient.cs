@@ -6,7 +6,7 @@ public class ArtikalApiClient(HttpClient httpClient)
     {
         List<Artikal>? artikli = null;
 
-        await foreach (var listaSoArtikli in httpClient.GetFromJsonAsAsyncEnumerable<Artikal>("/api/Artikal", cancellationToken))
+        await foreach (var listaSoArtikli in httpClient.GetFromJsonAsAsyncEnumerable<Artikal>("/api/artikal/getAll", cancellationToken))
         {
             if (artikli?.Count >= maxItems)
             {
