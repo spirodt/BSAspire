@@ -218,7 +218,7 @@ public partial class BSSMainTSApiServiceContext : DbContext
 
     public virtual DbSet<VwIndexText> VwIndexTexts { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=> optionsBuilder.UseSqlServer("Server=vlezi.com;Initial Catalog=BSHOME;Persist Security Info=True;User ID=spiro;Password=nirvana;Encrypt=False;Trust Server Certificate=True");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=> optionsBuilder.UseSqlServer();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

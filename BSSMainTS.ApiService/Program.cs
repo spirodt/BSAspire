@@ -23,7 +23,7 @@ internal class Program
         // Add service defaults & Aspire components.
         builder.AddServiceDefaults();
 
-
+        var a = builder.Configuration.GetConnectionString("BSSMainTSApiServiceContext");
         //SQL Connection string
         builder.Services.AddDbContext<BSSMainTSApiServiceContext>(options =>
             options.UseSqlServer(
